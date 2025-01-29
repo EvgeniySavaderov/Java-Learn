@@ -1,6 +1,6 @@
 public class Pair<T, U> {
-    public T first;
-    public U second;
+    private T first;
+    private U second;
 
     private Pair(T first, U second) { //закрытый конструктор
         this.first = first;
