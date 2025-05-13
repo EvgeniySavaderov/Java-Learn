@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1746234262429-1" author="Жека (generated)">
+        <createTable tableName="person">
+            <column autoIncrement="true" name="person_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_person"/>
+            </column>
+            <column name="fio" type="VARCHAR(255)"/>
+            <column name="deleted" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1746234262429-2" author="Жека (generated)">
+        <createTable tableName="person_pizza_order_list">
+            <column name="person_person_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pizza_order_list_pizza_order_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1746234262429-3" author="Жека (generated)">
+        <createTable tableName="pizza_base">
+            <column autoIncrement="true" name="pizza_base_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_pizzabase"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="base_cost" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1746234262429-4" author="Жека (generated)">
+        <createTable tableName="pizza_order">
+            <column autoIncrement="true" name="pizza_order_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_pizzaorder"/>
+            </column>
+            <column name="cost" type="INT"/>
+            <column name="size" type="text[]"/>
+            <column name="amount" type="integer[]"/>
+            <column name="deleted" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1746234262429-5" author="Жека (generated)">
+        <createTable tableName="pizza_order_bases">
+            <column name="pizza_base_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pizza_order_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1746234262429-6" author="Жека (generated)">
+        <addUniqueConstraint columnNames="pizza_order_list_pizza_order_id"
+                             constraintName="UC_PERSON_PIZZA_ORDER_LIST_PIZZAORDERLIST_PIZZA_ORDER"
+                             tableName="person_pizza_order_list"/>
+    </changeSet>
+    <changeSet id="1746234262429-7" author="Жека (generated)">
+        <addForeignKeyConstraint baseColumnNames="person_person_id" baseTableName="person_pizza_order_list"
+                                 constraintName="FK_PERPIZORDLIS_ON_PERSON" referencedColumnNames="person_id"
+                                 referencedTableName="person"/>
+    </changeSet>
+    <changeSet id="1746234262429-8" author="Жека (generated)">
+        <addForeignKeyConstraint baseColumnNames="pizza_order_list_pizza_order_id"
+                                 baseTableName="person_pizza_order_list" constraintName="FK_PERPIZORDLIS_ON_PIZZA_ORDER"
+                                 referencedColumnNames="pizza_order_id" referencedTableName="pizza_order"/>
+    </changeSet>
+    <changeSet id="1746234262429-9" author="Жека (generated)">
+        <addForeignKeyConstraint baseColumnNames="pizza_base_id" baseTableName="pizza_order_bases"
+                                 constraintName="FK_PIZORDBAS_ON_PIZZA_BASE" referencedColumnNames="pizza_base_id"
+                                 referencedTableName="pizza_base"/>
+    </changeSet>
+    <changeSet id="1746234262429-10" author="Жека (generated)">
+        <addForeignKeyConstraint baseColumnNames="pizza_order_id" baseTableName="pizza_order_bases"
+                                 constraintName="FK_PIZORDBAS_ON_PIZZA_ORDER" referencedColumnNames="pizza_order_id"
+                                 referencedTableName="pizza_order"/>
+    </changeSet>
+
+</databaseChangeLog>
